@@ -1,0 +1,47 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies
+      run: npm install
+      
+    - name: Build
+      run: npm run build
+      
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist
+```
+
+**這樣每次 Push 都會自動部署！** 🚀
+
+---
+
+## ⚙️ 啟用 GitHub Pages
+
+1. 前往你的 GitHub Repository 頁面
+2. 點擊 **Settings**
+3. 左側選單找到 **Pages**
+4. **Source** 選擇 `gh-pages` 分支
+5. 點擊 **Save**
+
+等待 1-2 分鐘後，你的網站就會上線在：
+```
+https://wwhitw-ship-it/Onlinescriptmenu/
